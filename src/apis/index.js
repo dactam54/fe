@@ -1,4 +1,3 @@
 export * from './app'
-export * from './product'
+export * from './location'
 export * from './user'
-export * from './brand'

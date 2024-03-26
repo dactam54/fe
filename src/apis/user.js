@@ -155,3 +155,16 @@ export const apiResetPassword = (payload) => new Promise(async (resolve, reject)
         reject(error)
     }
 })
+
+export const apiConfirmResetPassword = (payload) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axios({
+            method: 'POST',
+            url: '/api/v1/user/confirmResetPassword',
+            data: payload
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})
