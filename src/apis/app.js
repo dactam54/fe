@@ -1,6 +1,4 @@
 import axios from "axios";
-
-
 export const apiGetAllLocation = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({

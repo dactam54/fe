@@ -1,0 +1,13 @@
+const actionTypes = {
+    ALERT: 'ALERT',
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT',
+    LOADING: 'LOADING',
+    ADMIN: 'ADMIN',
+    UPDATE_CURRENT: 'UPDATE_CURRENT',
+    REMOVE_LOCATION: 'REMOVE_LOCATION',
+    GET_LOCATION: 'GET_LOCATION',
+    MY_LOCATION: 'MY_LOCATION',
+}
+
+export default actionTypes;

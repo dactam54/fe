@@ -1,4 +1,5 @@
 
+import axios from "axios"
 export const apiCreateLocation = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({

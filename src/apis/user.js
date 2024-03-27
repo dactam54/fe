@@ -1,3 +1,5 @@
+
+import axios from "axios"
 export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
@@ -12,11 +14,11 @@ export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
     }
 })
 
-export const createUser = (payload) => new Promise(async (resolve, reject) => {
+export const apiCreateUser = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
             method: 'POST',
-            url: '/api/v1/user',
+            url: '/api/v1/user/createUser',
             data: payload,
             credentials: 'include',
             withCredentials: true
@@ -46,6 +48,7 @@ export const apiGetAllUser = () => new Promise(async (resolve, reject) => {
             method: 'GET',
             url: '/api/v1/user/getAllUser'
         })
+        resolve(response)
 
     } catch (error) {
         reject(error)
