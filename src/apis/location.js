@@ -1,8 +1,7 @@
-
-import axios from "axios"
+import instance from "../axios"
 export const apiCreateLocation = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/location/createLocation',
             data: payload
@@ -15,7 +14,7 @@ export const apiCreateLocation = (payload) => new Promise(async (resolve, reject
 
 export const apiUpdateLocation = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/location/updateLocation',
             data: payload
@@ -28,9 +27,9 @@ export const apiUpdateLocation = (payload) => new Promise(async (resolve, reject
 
 export const apiDeleteLocation = (id) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'DELETE',
-            url: `/api/v1/location/deleteUser/${id}`
+            url: `/api/v1/location/deleteLocation/${id}`
         })
         resolve(response)
     } catch (error) {
@@ -41,7 +40,7 @@ export const apiDeleteLocation = (id) => new Promise(async (resolve, reject) => 
 
 export const apiGetAllLocation = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: '/api/v1/location/getAllLocation'
         })
@@ -53,7 +52,7 @@ export const apiGetAllLocation = () => new Promise(async (resolve, reject) => {
 
 export const apiGetLocationById = (id) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: `/api/v1/location/getLocation/${id}`
         })
@@ -65,7 +64,7 @@ export const apiGetLocationById = (id) => new Promise(async (resolve, reject) =>
 
 export const apiChangeStatus = (id, status) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: `/api/v1/location/changeStatus/${id}`,
             data: { status }
@@ -78,7 +77,7 @@ export const apiChangeStatus = (id, status) => new Promise(async (resolve, rejec
 
 export const apiUploadImageLocation = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/location/uploadImageLocation',
             data: payload
@@ -92,7 +91,7 @@ export const apiUploadImageLocation = (payload) => new Promise(async (resolve, r
 
 export const apiGetLimitLocation = (query) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: '/api/v1/location/getLimitLocation',
             params: query,
@@ -106,7 +105,7 @@ export const apiGetLimitLocation = (query) => new Promise(async (resolve, reject
 
 export const apiSearch = (query) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: '/api/v1/location/search',
             params: query

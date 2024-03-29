@@ -1,34 +1,36 @@
 import actionTypes from "../actions/actionTypes";
-
 const initState = {
-    updateCurrent: false,
-    myLocation: []
+    updateCurrentUser: false,
+    wishlists: [],
 }
+
 const userReducer = (state = initState, action) => {
     switch (action.type) {
-        case actionTypes.UPDATE_CURRENT:
-            return ({
+        case actionTypes.GET_CURRENT_USER:
+            return {
                 ...state,
-                updateCurrent: !state.updateCurrent
-            })
-        case actionTypes.MY_LOCATION:
-            return ({
+                updateCurrentUser: action.flag,
+                wishlists: action.wishlists || []
+            }
+        case actionTypes.ADD_WISHLIST:
+            return {
                 ...state,
-                myLocation: action.payload
-            })
-        case actionTypes.REMOVE_LOCATION:
-            return ({
+                wishlists: [...state.wishlists, action.data]
+            }
+        case actionTypes.REMOVE_WISHLIST:
+            return {
                 ...state,
-                myLocation: []
-            })
-
+                wishlists: state.wishlists.filter(wishlist => wishlist.id !== action.id)
+            }
         case actionTypes.LOGOUT:
-            return ({
+            return {
                 ...state,
-                myLocation: []
-            })
+                updateCurrentUser: false,
+                wishlists: []
+            }
         default:
             return state;
     }
+
 }
 export default userReducer;

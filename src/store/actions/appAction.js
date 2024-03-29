@@ -1,22 +1,21 @@
 import actionTypes from "./actionTypes";
-import * as api from '../../api';
+import { apiGetAllLocation } from "../../api/locationApi";
 
-const getLocation = () => async (dispatch) => {
+
+export const getAllLocation = () => async (dispatch) => {
     try {
-        const response = await api.apiGetAllLocation();
-        if (response.error === 0) {
+        const response = await apiGetAllLocation()
+        if (response.status === 200) {
             dispatch({
                 type: actionTypes.GET_LOCATION,
                 data: response.data
             })
         }
-
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_LOCATION,
+            type: actionTypes.ALERT,
             data: null
         })
     }
 }
 
-export default getLocation;

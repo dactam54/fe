@@ -5,79 +5,37 @@ import { apiLogin, apiCreateUser } from '../../apis/user'
 import actionTypes from '../../store/actions/actionTypes'
 // import './styles/login.css'
 
-const Login = (props) => {
+const Login = () => {
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation()
-  console.log('location', location.pathname)
+  const { isLogin } = useSelector(state => state.auth)
+
 
   const [payload, setPayload] = useState({
     email: '',
-    password: '',
+    password: ''
   })
-  const [error, setError] = useState({
-    errorEmail: '',
-    errorPassword: ''
-  })
-  const [isLogin, setIsLogin] = useState(() => location.pathname !== '/login' ? false : true)
-  const { isLoggedIn } = useSelector(state => state.auth)
 
   useEffect(() => {
-    if (isLoggedIn)
-      navigate('/detail')
-  }, [isLoggedIn])
+    if (isLogin) {
+      navigate('/manager_user')
+    }
+  }, [isLogin])
 
   const handleSubmit = async () => {
-    if (isLogin) {
-      dispatch({ type: actionTypes.LOADING, flag: true })
-      const response = await apiLogin({ email: payload.email, password: payload.password })
-      console.log('payload', payload)
-      dispatch({ type: actionTypes.LOADING, flag: false })
-
-      if (response.err === 0) {
-        dispatch({ type: actionTypes.LOGIN, accessToken: response.data.accessToken, isLoggedIn: true })
-        setPayload({ email: '', password: '' })
+    try {
+      const response = await apiLogin(payload)
+      if (response.error === 200) {
+        console.log('Login success')
+        dispatch({ type: actionTypes.LOGIN, isLogin: true, accessToken: response.accessToken })
+        navigate('/manager_user')
       }
-      else {
-        dispatch({
-          type: actionTypes.ALERT, alert: response.rs, callback: () => {
-            dispatch({ type: actionTypes.ALERT, alert: '' })
-          }
-        })
-      }
-    } else {
-      dispatch({ type: actionTypes.LOADING, flag: true })
-      const response = await apiCreateUser({ email: payload.email, password: payload.password })
-      dispatch({ type: actionTypes.LOADING, flag: false })
-
-      if (response.err === 0) {
-        dispatch({
-          type: actionTypes.ALERT,
-          alert: response.mes,
-          callback: () => {
-            dispatch({ type: actionTypes.ALERT, alert: '' })
-            navigate('/login')
-          }
-        })
-        setPayload({ email: '', password: '' })
-      }
-
-
-      // if (payload.email === '') {
-      //   setError(prevState => ({
-      //     ...prevState,
-      //     errorEmail: 'vui lòng nhập  địa chỉ email'
-      //   }));
-      // }
-
-      // if (payload.password === '') {
-      //   setError(prevState => ({
-      //     ...prevState,
-      //     errorPassword: 'vui lòng nhập mật khẩu'
-      //   }));
-      // }
+    } catch (error) {
+      console.log('Login failed', error)
     }
   }
+
   return (
     <div className='w-main flex'>
       <div className='w-1/3 flex-auto flex justify-center items-center'>

@@ -18,5 +18,6 @@ root.render(
       </BrowserRouter>
     </PersistGate>
   </Provider>
+
 );
 

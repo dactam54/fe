@@ -1,10 +1,11 @@
+
+import storage from 'redux-persist/lib/storage'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
+import appReducer from './appReducer'
+import userReducer from './userReducer'
+import authReducer from './authReducer'
 import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import appReducer from './appReducer'
-import authReducer from './authReducer'
-import userReducer from './userReducer'
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 const commonConfig = {
     storage,
@@ -13,20 +14,22 @@ const commonConfig = {
 
 const authConfig = {
     ...commonConfig,
-    key: 'shop',
-    whitelist: ['accessToken', 'isLoggedIn']
+    key: 'auth',
+    whitelist: ['isLogin', 'accessToken']
+
 }
+
 const appConfig = {
     ...commonConfig,
-    key: 'datn2023',
-    // whitelist: ['anonmyousCart']
+    key: 'app',
+    whitelist: ['location', 'wishlist', 'callback', 'isWishlist', 'isAdmin', 'isLoading']
 }
 
 const rootReducer = combineReducers({
-    auth: persistReducer(authConfig, authReducer),
     app: persistReducer(appConfig, appReducer),
+    auth: persistReducer(authConfig, authReducer),
     user: userReducer,
-    // location: locationReducer,
 })
+
 
 export default rootReducer

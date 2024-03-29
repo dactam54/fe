@@ -1,7 +1,8 @@
-import axios from "axios";
+
+import instance from "../axios";
 export const apiGetAllLocation = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: '/api/v1/location/getAllLocation'
         })

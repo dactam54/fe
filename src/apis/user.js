@@ -1,12 +1,15 @@
 
-import axios from "axios"
+import instance from "../axios"
 export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        console.log('payloadApiLogin', payload)
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/login',
             data: payload
         })
+        console.log('response', response)
+
         resolve(response)
 
     } catch (error) {
@@ -16,7 +19,7 @@ export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
 
 export const apiCreateUser = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/createUser',
             data: payload,
@@ -32,7 +35,7 @@ export const apiCreateUser = (payload) => new Promise(async (resolve, reject) =>
 
 export const apiGetCurrentUser = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: '/api/v1/user/getCurrentUser'
         })
@@ -44,7 +47,7 @@ export const apiGetCurrentUser = () => new Promise(async (resolve, reject) => {
 
 export const apiGetAllUser = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: '/api/v1/user/getAllUser'
         })
@@ -57,7 +60,7 @@ export const apiGetAllUser = () => new Promise(async (resolve, reject) => {
 
 export const apiGetUserById = (id) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'GET',
             url: `/api/v1/user/getUserById/${id}`
         })
@@ -71,7 +74,7 @@ export const apiGetUserById = (id) => new Promise(async (resolve, reject) => {
 
 export const apiUpdateUser = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/updateUser',
             data: payload
@@ -84,7 +87,7 @@ export const apiUpdateUser = (payload) => new Promise(async (resolve, reject) =>
 
 export const apiDeleteUser = (id) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'DELETE',
             url: `/api/v1/user/deleteUser/${id}`
         })
@@ -96,7 +99,7 @@ export const apiDeleteUser = (id) => new Promise(async (resolve, reject) => {
 
 export const apiChangeRole = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/changeRole',
             data: payload
@@ -109,7 +112,7 @@ export const apiChangeRole = (payload) => new Promise(async (resolve, reject) =>
 
 export const apiChangeAvatar = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/changeAvatar',
             data: payload
@@ -122,7 +125,7 @@ export const apiChangeAvatar = (payload) => new Promise(async (resolve, reject) 
 
 export const apiRemoveAvatar = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/removeAvatar',
             data: payload
@@ -135,7 +138,7 @@ export const apiRemoveAvatar = (payload) => new Promise(async (resolve, reject) 
 
 export const apiChangePassword = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/changePassword',
             data: payload
@@ -148,7 +151,7 @@ export const apiChangePassword = (payload) => new Promise(async (resolve, reject
 
 export const apiResetPassword = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/resetPassword ',
             data: payload
@@ -161,7 +164,7 @@ export const apiResetPassword = (payload) => new Promise(async (resolve, reject)
 
 export const apiConfirmResetPassword = (payload) => new Promise(async (resolve, reject) => {
     try {
-        const response = await axios({
+        const response = await instance({
             method: 'POST',
             url: '/api/v1/user/confirmResetPassword',
             data: payload
