@@ -22,7 +22,7 @@ const authConfig = {
 const appConfig = {
     ...commonConfig,
     key: 'app',
-    whitelist: ['location', 'wishlist', 'callback', 'isWishlist', 'isAdmin', 'isLoading']
+    whitelist: ['location', 'wishlist', 'isAdmin']
 }
 
 const rootReducer = combineReducers({
