@@ -17,9 +17,9 @@ function App() {
         <Route path={path.HOME} element={<Home />} />
         <Route path={path.LOGIN} element={<Login />} >
           <Route path={path.MANAGER_USER} element={<ManagerUer />} />
+          <Route path={path.MANAGER_LOCATION} element={<ManagerLocation />} />
         </Route>
         <Route path={path.REGISTER} element={<Register />} />
-        <Route path={path.MANAGER_LOCATION} element={<ManagerLocation />} />
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </div>

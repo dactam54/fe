@@ -3,13 +3,16 @@ import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiLogin, apiCreateUser } from '../../apis/user'
 import actionTypes from '../../store/actions/actionTypes'
+import { toast } from 'react-toastify'
 // import './styles/login.css'
 
 const Login = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const { isLogin } = useSelector(state => state.auth)
+  const [login, setLogin] = useState(() => location.state?.register ? false : true)
 
 
   const [payload, setPayload] = useState({
@@ -19,20 +22,49 @@ const Login = () => {
 
   useEffect(() => {
     if (isLogin) {
+      toast.success('Đăng nhập thành công')
       navigate('/manager_user')
+
     }
   }, [isLogin])
 
   const handleSubmit = async () => {
-    try {
-      const response = await apiLogin(payload)
-      if (response.error === 200) {
-        console.log('Login success')
-        dispatch({ type: actionTypes.LOGIN, isLogin: true, accessToken: response.accessToken })
-        navigate('/manager_user')
+    if (login) {
+      const response = await apiLogin({ email: payload.email, password: payload.password })
+
+      console.log('responsefe', response)
+
+
+      if (response.err === 0) {
+        dispatch({ type: actionTypes.LOGIN, accessToken: response.accessToken, isLogin: true })
+        setPayload({ email: '', password: '' })
+        toast.success('Đăng nhập thành công')
+        navigate('/manager_location')
+      } else {
+        dispatch({
+          type: actionTypes.ALERT, alert: response.rs, callback: () => {
+            dispatch({ type: actionTypes.ALERT, alert: '' })
+          }
+        })
       }
-    } catch (error) {
-      console.log('Login failed', error)
+    } else {
+      // const response = await apiCreateUser({ email: payload.email, password: payload.password })
+      // if (response.err === 0) {
+      //   dispatch({
+      //     type: actionTypes.ALERT,
+      //     alert: response.mes,
+      //     callback: () => {
+      //       dispatch({ type: actionTypes.ALERT, alert: '' })
+      //       navigate('/')
+      //     }
+      //   })
+      //   setPayload({
+      //     email: '',
+      //     password: '',
+      //     name: ''
+      //   })
+      // }
+      navigate('/register')
     }
   }
 
@@ -70,12 +102,19 @@ const Login = () => {
         >
           Đăng nhập
         </button>
+        <div>
+          Bạn chưa có tài khoản? <Link to='/register' className='text-center'>Đăng ký</Link>
+        </div>
+
       </div>
+
       <div className='w-1/3 flex-auto flex justify-center items-center'>
+
       </div>
     </div>
 
   )
 
 }
+
 export default Login

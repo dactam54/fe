@@ -9,7 +9,22 @@ const Home = () => {
                 <div>
                     <p>Đây là trang public</p>
                 </div>
-                <Link to='/login'>Đăng nhập/ Đăng kí</Link>
+
+                <div>
+
+                    <Link to='/manager_user'>Quản lý người dùng</Link>
+                </div>
+
+                <div>
+                    <Link to='/login'>Đăng nhập</Link>
+                </div>
+
+
+                <div>
+                    <Link to='/register'>Đăng kí</Link>
+                </div>
+
+
             </div>
         </div>
     )

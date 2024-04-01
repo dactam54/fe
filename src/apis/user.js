@@ -21,7 +21,7 @@ export const apiCreateUser = (payload) => new Promise(async (resolve, reject) =>
     try {
         const response = await instance({
             method: 'POST',
-            url: '/api/v1/user/createUser',
+            url: '/api/v1/createUser',
             data: payload,
             credentials: 'include',
             withCredentials: true
