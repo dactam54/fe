@@ -1,5 +1,6 @@
-
+// import axios from "axios"
 import instance from "../axios"
+
 export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
     try {
         console.log('payloadApiLogin', payload)
@@ -17,20 +18,46 @@ export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
     }
 })
 
-export const apiCreateUser = (payload) => new Promise(async (resolve, reject) => {
+export const apiRegister = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await instance({
             method: 'POST',
-            url: '/api/v1/createUser',
-            data: payload,
-            credentials: 'include',
-            withCredentials: true
+            url: '/api/v1/register',
+            data: payload
         })
         resolve(response)
     } catch (error) {
         reject(error)
     }
+
 })
+
+// export const apiCreateUser = (payload) => new Promise(async (resolve, reject) => {
+//     try {
+//         const response = await instance({
+//             method: 'POST',
+//             url: '/api/v1/createUser',
+//             payload,
+//             // credentials: 'include',
+//             // withCredentials: true
+//         })
+//         resolve(response)
+//     } catch (error) {
+//         reject(error)
+//     }
+// })
+
+
+// export const apiCreateUser = async (payload) => {
+//     try {
+//         const response = await axios.post('/api/v1/createUser', payload, {
+//             withCredentials: true
+//         });
+//         return response.data;
+//     } catch (error) {
+//         throw error;
+//     }
+// };
 
 
 export const apiGetCurrentUser = () => new Promise(async (resolve, reject) => {
@@ -167,6 +194,20 @@ export const apiConfirmResetPassword = (payload) => new Promise(async (resolve, 
         const response = await instance({
             method: 'POST',
             url: '/api/v1/user/confirmResetPassword',
+            data: payload
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})
+
+
+export const apiNewPassword = (payload) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await instance({
+            method: 'POST',
+            url: '/api/v1/user/newPassword',
             data: payload
         })
         resolve(response)

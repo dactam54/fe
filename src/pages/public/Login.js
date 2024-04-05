@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { apiLogin, apiCreateUser } from '../../apis/user'
+import { apiLogin } from '../../apis/user'
 import actionTypes from '../../store/actions/actionTypes'
 import { toast } from 'react-toastify'
+
 // import './styles/login.css'
 
 const Login = () => {
@@ -31,10 +32,7 @@ const Login = () => {
   const handleSubmit = async () => {
     if (login) {
       const response = await apiLogin({ email: payload.email, password: payload.password })
-
-      console.log('responsefe', response)
-
-
+      console.log('response FE Login', response)
       if (response.err === 0) {
         dispatch({ type: actionTypes.LOGIN, accessToken: response.accessToken, isLogin: true })
         setPayload({ email: '', password: '' })
@@ -48,22 +46,6 @@ const Login = () => {
         })
       }
     } else {
-      // const response = await apiCreateUser({ email: payload.email, password: payload.password })
-      // if (response.err === 0) {
-      //   dispatch({
-      //     type: actionTypes.ALERT,
-      //     alert: response.mes,
-      //     callback: () => {
-      //       dispatch({ type: actionTypes.ALERT, alert: '' })
-      //       navigate('/')
-      //     }
-      //   })
-      //   setPayload({
-      //     email: '',
-      //     password: '',
-      //     name: ''
-      //   })
-      // }
       navigate('/register')
     }
   }
@@ -81,10 +63,6 @@ const Login = () => {
           value={payload.email}
           onChange={e => setPayload(prev => ({ ...prev, email: e.target.value }))}
         />
-        {/* {
-          error.errorEmail && <label className="errorLabel">{error.errorEmail}</label>
-        } */}
-
         <input
           type="password"
           className='p-2 bg-gray-100 border rounded-md placeholder:italic placeholder:text-gray-700'
@@ -92,9 +70,6 @@ const Login = () => {
           value={payload.password}
           onChange={e => setPayload(prev => ({ ...prev, password: e.target.value }))}
         />
-        {/* {
-          error.errorPassword && <label className="errorLabel">{error.errorPassword}</label>
-        } */}
         <button
           type='button'
           className='px-4 py-2 mx-auto bg-blue-500 text-white rounded-md font-semibold w-fit  '
@@ -105,13 +80,17 @@ const Login = () => {
         <div>
           Bạn chưa có tài khoản? <Link to='/register' className='text-center'>Đăng ký</Link>
         </div>
-
+        <div>
+          <Link to='/forgotpassword' className='text-center'>Quên mật khẩu</Link>
+        </div>
       </div>
 
       <div className='w-1/3 flex-auto flex justify-center items-center'>
 
       </div>
     </div>
+
+
 
   )
 

@@ -4,7 +4,6 @@ const initState = {
     location: [],
     wishlist: [],
     callback: null,
-
     isWishlist: false,
     isAdmin: false,
     isLoading: false,
