@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { apiLogin } from '../../apis/user'
 import actionTypes from '../../store/actions/actionTypes'
 import { toast } from 'react-toastify'
-
+import path from '../../utils/path'
 // import './styles/login.css'
 
 const Login = () => {
@@ -13,20 +13,28 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { isLogin } = useSelector(state => state.auth)
-  const [login, setLogin] = useState(() => location.state?.register ? false : true)
 
+  const [login, setLogin] = useState(() => location.state?.register ? false : true)
 
   const [payload, setPayload] = useState({
     email: '',
     password: ''
   })
 
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     toast.success('Đăng nhập thành công')
+  //     navigate(`/${path.USER}`)
+  //   }
+  // }, [isLogin, updateCurrentUser])
+
   useEffect(() => {
     if (isLogin) {
+      navigate(`/${path.USER}`)
       toast.success('Đăng nhập thành công')
-      navigate('/manager_user')
-
     }
+    // navigate('/')
+
   }, [isLogin])
 
   const handleSubmit = async () => {
@@ -37,16 +45,17 @@ const Login = () => {
         dispatch({ type: actionTypes.LOGIN, accessToken: response.accessToken, isLogin: true })
         setPayload({ email: '', password: '' })
         toast.success('Đăng nhập thành công')
-        navigate('/manager_location')
+        navigate(`/${path.USER}`)
       } else {
         dispatch({
           type: actionTypes.ALERT, alert: response.rs, callback: () => {
             dispatch({ type: actionTypes.ALERT, alert: '' })
+            toast.warn('response.rs')
           }
         })
       }
     } else {
-      navigate('/register')
+      navigate(`/${path.REGISTER}`)
     }
   }
 
@@ -77,11 +86,19 @@ const Login = () => {
         >
           Đăng nhập
         </button>
+        {/* <div>
+          Bạn chưa có tài khoản? <Link to='/dang-ki' className='text-center'>Đăng ký</Link>
+        </div> */}
+        <span className='flex gap-1'>
+          <span>{isLogin ? 'Bạn chưa có tài khoản?' : 'Đã có tài khoản?'}</span>
+          <span
+            className='text-blue-500 hover:underline cursor-pointer'
+            onClick={() => setLogin(prev => !prev)}
+
+          >{isLogin ? 'Đăng ký tài khoản' : 'Đăng nhập ngay'}</span>
+        </span>
         <div>
-          Bạn chưa có tài khoản? <Link to='/register' className='text-center'>Đăng ký</Link>
-        </div>
-        <div>
-          <Link to='/forgotpassword' className='text-center'>Quên mật khẩu</Link>
+          <Link to='/quen-mat-khau' className='text-center'>Quên mật khẩu</Link>
         </div>
       </div>
 

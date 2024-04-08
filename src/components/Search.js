@@ -2,8 +2,10 @@ import React from 'react'
 
 const Search = () => {
     return (
-        <div>
+        <div style={{ color: "black" }}>
+            {/* <input type='text'></input> */}
             Search
+
         </div>
     )
 }

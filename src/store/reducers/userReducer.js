@@ -9,8 +9,8 @@ const userReducer = (state = initState, action) => {
         case actionTypes.GET_CURRENT_USER:
             return {
                 ...state,
-                updateCurrentUser: action.flag,
-                wishlists: action.wishlists || []
+                updateCurrentUser: !state.updateCurrentUser
+
             }
         case actionTypes.ADD_WISHLIST:
             return {

@@ -17,8 +17,8 @@ const Register = () => {
         try {
             const response = await apiRegister(payload)
             if (response.err === 0) {
-                toast.success('Đăng kí thành công')
-                navigate('/login')
+                // toast.success('Đăng kí thành công')
+                navigate('/dang-nhap')
 
             }
         } catch (err) {
@@ -54,7 +54,7 @@ const Register = () => {
                     Đăng kí
                 </button>
                 <div>
-                    Bạn đã có tài khoản? <Link to='/login' className='text-center'>Đăng nhập</Link>
+                    Bạn đã có tài khoản? <Link to='/dang-nhap' className='text-center'>Đăng nhập</Link>
                 </div>
 
 

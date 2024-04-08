@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { apiGetAllLocation } from '../../apis/location'
+import { apiGetAllLocation, apiGetLocationById } from '../../apis/location'
 
 const ManagerLocation = () => {
 
+    // const dispatch = useDispatch()
+
+
     const [data, setData] = useState([])
+    const [dataModal, setDataModal] = useState(null)
+
+
     const fetchData = async () => {
         const response = await apiGetAllLocation()
-        console.log('response', response)
+        console.log('response', response.data)
         setData(response.data)
     }
 
@@ -14,21 +20,34 @@ const ManagerLocation = () => {
         fetchData()
     }, [])
 
+    const getId = async (id) => {
+        console.log('id', id)
+        try {
+            const response = await apiGetLocationById(id)
+            setDataModal(response.data)
+            console.log('getId', response.data)
+        } catch (error) {
+            console.log('error', error)
+        }
+    }
+
+
     return (
         <div>
-            <h1>Detail</h1>
-            {data.map((item, index) => {
+            <h1>Danh sách địa điểm</h1>
+            {data.filter(item => item.status == true).map((item, index) => {
                 return (
-                    <div key={index}>
+                    <ul key={index}>
                         <li>{item.name}</li>
                         <li>{item.region}</li>
-                        {/* <li>{item?.address}</li> */}
+
                         {item?.isHot == true && <li>{"Đang hiện hành"}</li>}
                         <li>
                             {item?.openTime[0]} AM
                         </li>
+                        <button onClick={() => getId(item.id)}>Xem chi tiết</button>
 
-                    </div>
+                    </ul>
                 )
             })
             }

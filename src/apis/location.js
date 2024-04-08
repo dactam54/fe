@@ -54,7 +54,7 @@ export const apiGetLocationById = (id) => new Promise(async (resolve, reject) =>
     try {
         const response = await instance({
             method: 'GET',
-            url: `/api/v1/location/getLocation/${id}`
+            url: '/api/v1/location/getLocationById/' + id
         })
         resolve(response)
     } catch (error) {
